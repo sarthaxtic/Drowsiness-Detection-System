@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drowsiness Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #121212;
+            color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: #00ffc8;
+            text-shadow: 0 0 10px #00ffc8;
+        }
+
+        .video-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .video-container img {
+            border: 5px solid #00ffc8;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 0 20px #00ffc8;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #00ffc8;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #121212;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00bfa5;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Real-Time Drowsiness Detector</h1>
+
+    <div class="video-container">
+        <img src="{{ url_for('video_feed') }}" alt="Drowsiness Video Feed">
+    </div>
+
+    <div class="button-container">
+        <button onclick="startDetection()">Start Detection</button>
+        <button onclick="stopDetection()">Stop Detection</button>
+    </div>
+
+    <script>
+        function startDetection() {
+            fetch('/start_detection')
+                .then(response => response.text())
+                .then(data => alert(data));
+        }
+
+        function stopDetection() {
+            fetch('/stop_detection')
+                .then(response => response.text())
+                .then(data => alert(data));
+        }
+    </script>
+</body>
+</html>
